@@ -1,0 +1,23 @@
+<mat-toolbar>
+  <div class="container center-hv">
+    <span>Equipos</span>
+    <span class="example-spacer"></span>
+
+    <button
+      mat-icon-button
+      class="example-icon"
+      aria-label="Example icon-button with share icon"
+      [routerLink]="['/auth/login']"
+    >
+      <mat-icon>login</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>
+<div
+  class="container center-hv row-column full-height"
+  *ngIf="this.teamsList.length"
+>
+  <div class="px-sm" style="width: calc(100% - 20px)">
+    <app-table [dataTable]="this.teamsList" style="width: 100%"></app-table>
+  </div>
+</div>

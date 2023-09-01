@@ -1,0 +1,83 @@
+<div class="container center-hv row-column full-height" style="overflow-y: auto;">
+  <mat-card class="example-card" style="max-width: 600px;width: 100%;">
+    <mat-card-header>
+      <mat-card-subtitle>Nuevo equipo</mat-card-subtitle>
+      <mat-card-title>Registra un nuevo equipo</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-divider></mat-divider>
+      <br>
+      <form [formGroup]="registerNewTeam" class="py-sm row-wrap" style="align-items: center; justify-content: space-evenly;">
+        <p class="flex-fill px-sm">
+          <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Nombre del equipo</mat-label>
+            <input matInput placeholder="Nombre del equipo" formControlName="teamName">
+            <mat-icon matSuffix>groups</mat-icon>
+          </mat-form-field>
+        </p>
+        <p class="flex-fill px-sm">
+          <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Estadio</mat-label>
+            <input matInput placeholder="Estadio" formControlName="teamStadium">
+            <mat-icon matSuffix>stadium</mat-icon>
+          </mat-form-field>
+        </p>
+
+        <p class="flex-fill px-sm">
+          <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Sitio web</mat-label>
+            <input matInput placeholder="Sitio web" formControlName="webSite">
+            <mat-icon matSuffix>language</mat-icon>
+          </mat-form-field>
+        </p>
+        <p class="flex-fill px-sm">
+          <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Nacionalidad</mat-label>
+            <input matInput placeholder="Nacionalidad" formControlName="nationality">
+            <mat-icon matSuffix>flag</mat-icon>
+          </mat-form-field>
+        </p>
+
+        <p class="flex-fill px-sm">
+          <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Fundación</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="fundacion">
+            <mat-hint>MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </p>
+        <p class="flex-fill px-sm">
+          <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Entrenador</mat-label>
+            <input matInput placeholder="Entrenador" formControlName="trainer">
+            <mat-icon matSuffix>account_circle</mat-icon>
+          </mat-form-field>
+        </p>
+
+        <p class="flex-fill px-sm">
+          <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Capacidad</mat-label>
+            <input matInput placeholder="Capacidad" formControlName="capacity">
+            <mat-icon matSuffix>group_add</mat-icon>
+          </mat-form-field>
+        </p>
+        <p class="flex-fill px-sm">
+          <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Valor</mat-label>
+            <input matInput placeholder="Valor" formControlName="value">
+            <mat-icon matSuffix>price_check</mat-icon>
+          </mat-form-field>
+        </p>
+
+      </form>
+    </mat-card-content>
+    <mat-card-actions style="display: flex;justify-content: flex-end;gap: 20px;">
+      <button mat-button (click)="registerNewTeam.reset()">LIMPIAR</button>
+      <button mat-button [disabled]="!registerNewTeam.valid" (click)="submitForm()" mat-raised-button color="primary">REGISTRAR</button>
+    </mat-card-actions>
+    <mat-card-footer>
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </mat-card-footer>
+  </mat-card>
+</div>

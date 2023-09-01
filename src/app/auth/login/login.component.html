@@ -1,0 +1,69 @@
+<div
+  class="container center-hv row-column full-height"
+  style="overflow-y: auto"
+>
+  <mat-card class="example-card" style="max-width: 360px; width: 100%">
+    <mat-card-header class="row-wrap">
+      <button mat-icon-button aria-label="regresar" [routerLink]="['/']">
+        <mat-icon style="margin-left:5px !important">arrow_back_ios</mat-icon>
+      </button>
+      <div>
+        <mat-card-subtitle
+          >Ingresa a todas las ventajas desde aquí</mat-card-subtitle
+        >
+        <mat-card-title>Bienvenido de nuevo!</mat-card-title>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-divider></mat-divider>
+      <br />
+      <form
+        [formGroup]="loginUserForm"
+        class="py-sm row-wrap"
+        style="align-items: center; justify-content: space-evenly"
+      >
+        <p class="flex-fill px-sm">
+          <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Usuario</mat-label>
+            <input matInput placeholder="Usuario" formControlName="user" />
+            <mat-icon matSuffix>person</mat-icon>
+          </mat-form-field>
+        </p>
+        <p class="flex-fill px-sm">
+          <mat-form-field appearance="outline" style="width: 100%">
+            <mat-label>Contraseña</mat-label>
+            <input
+              matInput
+              #password
+              [type]="hide ? 'password' : 'text'"
+              placeholder="Contraseña"
+              type="password"
+              formControlName="password"
+            />
+            <mat-icon matSuffix (click)="hide = !hide">{{
+              hide ? "visibility" : "visibility_off"
+            }}</mat-icon>
+          </mat-form-field>
+        </p>
+      </form>
+    </mat-card-content>
+    <mat-card-actions
+      style="display: flex; justify-content: flex-end; gap: 20px"
+    >
+      <button mat-button (click)="loginUserForm.reset()">LIMPIAR</button>
+      <button
+        mat-button
+        [disabled]="!loginUserForm.valid"
+        mat-raised-button
+        color="primary"
+        type="button"
+        (click)="onSubmit()"
+      >
+        INGRESAR
+      </button>
+    </mat-card-actions>
+    <mat-card-footer>
+      <mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+    </mat-card-footer>
+  </mat-card>
+</div>

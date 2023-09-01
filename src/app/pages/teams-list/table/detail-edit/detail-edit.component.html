@@ -1,0 +1,90 @@
+<h1 mat-dialog-title>Hola {{ data.nombre }}</h1>
+<div mat-dialog-content>
+  <p>Aquí puedes editar las propiedades de tu equipo</p>
+  <form
+    [formGroup]="teamEdit"
+    class="py-sm row-wrap"
+    style="align-items: center; justify-content: space-evenly"
+  >
+    <p class="flex-fill px-sm">
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label>Nombre del equipo</mat-label>
+        <input
+          matInput
+          placeholder="Nombre del equipo"
+          formControlName="teamName"
+          [(ngModel)]="data.nombre"
+        />
+        <mat-icon matSuffix>groups</mat-icon>
+      </mat-form-field>
+    </p>
+    <p class="flex-fill px-sm">
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label>Estadio</mat-label>
+        <input matInput placeholder="Estadio" formControlName="teamStadium" [(ngModel)]="data.estadio"/>
+        <mat-icon matSuffix>stadium</mat-icon>
+      </mat-form-field>
+    </p>
+
+    <p class="flex-fill px-sm">
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label>Sitio web</mat-label>
+        <input matInput placeholder="Sitio web" formControlName="webSite" [(ngModel)]="data.sitioWeb" />
+        <mat-icon matSuffix>language</mat-icon>
+      </mat-form-field>
+    </p>
+    <p class="flex-fill px-sm">
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label>Nacionalidad</mat-label>
+        <input
+          matInput
+          placeholder="Nacionalidad"
+          formControlName="nationality"
+          [(ngModel)]="data.nacionalidad"
+        />
+        <mat-icon matSuffix>flag</mat-icon>
+      </mat-form-field>
+    </p>
+
+    <p class="flex-fill px-sm">
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label>Fundación</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="fundacion" [(ngModel)]="data.fundacion" />
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </p>
+    <p class="flex-fill px-sm">
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label>Entrenador</mat-label>
+        <input matInput placeholder="Entrenador" formControlName="trainer" [(ngModel)]="data.entrenador" />
+        <mat-icon matSuffix>account_circle</mat-icon>
+      </mat-form-field>
+    </p>
+
+    <p class="flex-fill px-sm">
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label>Capacidad</mat-label>
+        <input matInput placeholder="Capacidad" formControlName="capacity" [(ngModel)]="data.capacidad" />
+        <mat-icon matSuffix>group_add</mat-icon>
+      </mat-form-field>
+    </p>
+    <p class="flex-fill px-sm">
+      <mat-form-field appearance="outline" style="width: 100%">
+        <mat-label>Valor</mat-label>
+        <input matInput placeholder="Valor" formControlName="value" [(ngModel)]="data.valor" />
+        <mat-icon matSuffix>price_check</mat-icon>
+      </mat-form-field>
+    </p>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button (click)="teamUpdate()">
+    Actulizar
+  </button>
+</div>
