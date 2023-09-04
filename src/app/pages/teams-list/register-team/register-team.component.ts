@@ -17,6 +17,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { UtilService } from 'src/app/services/util.service';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-register-team',
@@ -35,12 +36,13 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatDividerModule,
     MatProgressBarModule,
     ReactiveFormsModule,
+    RouterLink
   ],
 })
 export class RegisterTeamComponent {
   registerNewTeam!: FormGroup;
-
-  constructor(public fb: FormBuilder, public utilService: UtilService) {}
+  showBarLoad = false;
+  constructor(public fb: FormBuilder, public utilService: UtilService, public router: Router) {}
 
   ngOnInit() {
     this.registerNewTeam = this.fb.group({
@@ -56,6 +58,7 @@ export class RegisterTeamComponent {
   }
 
   submitForm() {
+    this.showBarLoad = true
     let date = this.registerNewTeam.controls['fundacion'].value
     console.log(new Date(date).toISOString());
     let objSelf = {
@@ -75,6 +78,8 @@ export class RegisterTeamComponent {
       .setNewTeam(objSelf)
       .subscribe((res: any) => {
         console.log('respuesta despues de crear', res);
+        this.showBarLoad = false;
+        this.router.navigate(['./']);
       });
 
   }
