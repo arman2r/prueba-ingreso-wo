@@ -13,6 +13,10 @@ export class UtilService {
     return this.http.get(`${environment.API_URL}/equipos/listar/` + params)
   }
 
+  getTeamsListRangeDate(params: any) {
+    return this.http.get(`${environment.API_URL}/equipos/consultar/` + params.firstDate + '/' + params.secondDate)
+  }
+
   setNewTeam(params:any) {
     return this.http.post(`${environment.API_URL}/equipos/crear/`, params)
   }

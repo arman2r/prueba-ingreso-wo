@@ -18,6 +18,6 @@
   *ngIf="this.teamsList.length"
 >
   <div class="px-sm" style="width: calc(100% - 20px)">
-    <app-table [dataTable]="this.teamsList" style="width: 100%"></app-table>
+    <app-table [dataTable]="this.teamsList" (selfDateFilter)="getRangeDate($event)" (CleaerDateFilter)="filterClearDate($event)" style="width: 100%"></app-table>
   </div>
 </div>

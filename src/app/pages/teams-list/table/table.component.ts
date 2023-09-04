@@ -1,9 +1,9 @@
-import { AfterViewInit, Component, Input, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SelectionModel } from '@angular/cdk/collections';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
-import { CommonModule, JsonPipe, NgIf } from '@angular/common';
+import { CommonModule, DatePipe, JsonPipe, NgIf } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterLink } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
@@ -78,7 +78,13 @@ export class TableComponent implements AfterViewInit {
   });
   notEditOrRemove = true;
   selectedRow: any;
+  rangeDate!: string;
+  showResetFilterBtn = false;
   @Input() dataTable: RowDataTable[] = [];
+
+  @Output() selfDateFilter = new EventEmitter<string>();
+  @Output() CleaerDateFilter = new EventEmitter<string>();
+
   displayedColumns: string[] = [
     'select',
     'id',
@@ -130,7 +136,7 @@ export class TableComponent implements AfterViewInit {
   }
 
   ngOnInit(): void {
-    this.dataSource.data = this.dataTable;
+    //this.dataSource.data = this.dataTable;
   }
 
   ngAfterViewInit() {
@@ -157,8 +163,36 @@ export class TableComponent implements AfterViewInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed', result);
+      //console.log('The dialog was closed', result);
       //this.animal = result;
     });
   }
+
+  dateRangeChange(dateRangeStart: HTMLInputElement, dateRangeEnd: HTMLInputElement) {
+    //console.log(dateRangeStart.value);
+    //console.log(dateRangeEnd.value);
+
+    let datePipe = new DatePipe('en-US');
+    let firstDate = datePipe.transform(dateRangeStart.value, 'dd-MM-yyyy');
+    let secondDate = datePipe.transform(dateRangeEnd.value, 'dd-MM-yyyy');
+
+    if(firstDate?.length != 0&& secondDate?.length != 0) {
+      this.selfDateFilter.emit(JSON.stringify({'firstDate': firstDate, 'secondDate': secondDate }));
+      this.showResetFilterBtn = true
+    }
+
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (this.dataTable) { // also add this check
+      //console.log('Input data changed:', this.dataTable);
+      this.dataSource.data = this.dataTable;
+    }
+  }
+
+  filterClear(){
+    this.CleaerDateFilter.emit('resetFilter')
+    this.showResetFilterBtn = false
+  }
+
 }

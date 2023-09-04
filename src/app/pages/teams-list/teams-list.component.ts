@@ -29,16 +29,19 @@ export class TeamsListComponent {
   teamsList = [];
   currentUser = true;
 
-  constructor(private util: UtilService, private authService: AuthenticationServiceService) {}
+  constructor(
+    private util: UtilService,
+    private authService: AuthenticationServiceService
+  ) {}
 
   ngOnInit(): void {
     this.getAllListTeams('0/1000');
 
     this.currentUser = this.authService.currentUserValue ? false : true;
     if (this.currentUser) {
-      console.log('esta logueado')
+      console.log('esta logueado');
     } else {
-      console.log('no esta logueado')
+      console.log('no esta logueado');
     }
   }
 
@@ -48,4 +51,22 @@ export class TeamsListComponent {
       console.log('que trae teams', this.teamsList);
     });
   }
+
+  filterXRange(rangeDate: any) {
+    console.log(JSON.parse(rangeDate))
+    this.util.getTeamsListRangeDate(JSON.parse(rangeDate)).subscribe((res: any) => {
+      console.log('respuesta filtro', res)
+      this.teamsList = res;
+    });
+  }
+
+  getRangeDate(date: any) {
+    console.log('que fechas recibe', date);
+    this.filterXRange(date)
+  }
+
+  filterClearDate(res: any) {
+    this.getAllListTeams('0/1000');
+  }
+
 }
